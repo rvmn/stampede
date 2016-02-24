@@ -1,0 +1,25 @@
+[Unit]
+Description=Stampede : Manager
+After=docker.service
+Requires=docker.service
+
+[Service]
+Environment=STAMPEDE_PORT=9080
+Environment=STAMPEDE_VERSION=0.4.0
+Environment=CATTLE_VERSION=0.4.0
+Environment=CATTLE_LIBVIRT_VERSION=0.4.0
+Environment=CATTLE_AGENT_INSTANCE_IMAGE_TAG=0.4.0
+EnvironmentFile=-/etc/environment
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin mookjp/systemd-docker
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm rvmn/stampede:latest| bash"
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=120
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
