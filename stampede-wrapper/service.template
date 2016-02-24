@@ -11,7 +11,7 @@ Environment=CATTLE_LIBVIRT_VERSION=dev
 Environment=CATTLE_AGENT_INSTANCE_IMAGE_TAG=dev
 EnvironmentFile=-/etc/environment
 ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin mookjp/systemd-docker
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm rvmn/stampede:${STAMPEDE_VERSION} %n | bash"
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm rvmn/stampede:latest | bash"
 Restart=always
 RestartSec=10s
 Type=notify
