@@ -5,13 +5,13 @@ Requires=docker.service
 
 [Service]
 Environment=STAMPEDE_PORT=9080
-Environment=STAMPEDE_VERSION=dev
+Environment=STAMPEDE_VERSION=latest
 Environment=CATTLE_VERSION=dev
 Environment=CATTLE_LIBVIRT_VERSION=dev
 Environment=CATTLE_AGENT_INSTANCE_IMAGE_TAG=dev
 EnvironmentFile=-/etc/environment
 ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin mookjp/systemd-docker
-ExecStart=/bin/bash -c "/usr/bin/docker run --rm cattle/stampede-wrapper:${STAMPEDE_VERSION} %n | bash"
+ExecStart=/bin/bash -c "/usr/bin/docker run --rm rvmn/stampede:${STAMPEDE_VERSION} %n | bash"
 Restart=always
 RestartSec=10s
 Type=notify
